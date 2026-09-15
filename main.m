@@ -1,7 +1,7 @@
 %|-----------------------------------------------------------------------
 %|
 %|------MAKE SURE TO RUN init.m WITH YOUR FILES IN THE INPUT VALUES------
-%|
+%|------USE VARIABLES STATED IN README WHEN EXPORTING ORK .csv ----------
 %|------ALSO, MAKE SURE YOUR .csv FILES ARE IN THE PATH OF THE PROGRAM---
 %|------ONCE COMPLETED, RUN THIS SCRIPT TO PLOT THE FEATURES-------------
 %|
