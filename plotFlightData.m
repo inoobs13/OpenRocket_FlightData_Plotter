@@ -1,6 +1,6 @@
 function plotFlightData(time1, data1, label1, ...
                         time2, data2, label2, ...
-                        xLabel, yLabel, plotTitle, figureName)
+                        xLabel, yLabel, plotTitle, figureName, eventsBool, events)
 
     figure("Name", figureName, 'NumberTitle', 'off');
 
@@ -22,4 +22,7 @@ function plotFlightData(time1, data1, label1, ...
     grid on
     grid minor
 
+    for i=1:height(events)
+        xline(events.Time(i), '--', events.Name(i), 'LabelVerticalAlignment','bottom')
+    end
 end

@@ -11,8 +11,8 @@ close all;
 %| --- Plot Functions --- 
 
 plotFlightData(ftime, falt, "Flight", otime, oalt, "OpenRocket Sim", "Time (s)", ...
-    "Altitude AGL (ft)", "Altitude Data", "Altitude") % Altitude
+    "Altitude AGL (ft)", "Altitude Data", "Altitude", true, events) % Altitude
 plotFlightData(ftime, fvv, "Flight", otime, ovv, "OpenRocket Sim", "Time (s)", ...
-    "Vertical Velocity (ft/s)", "Vertical Velocity", "Vert Vel.") % Vertical Velocity
+    "Vertical Velocity (ft/s)", "Vertical Velocity", "Vert Vel.", true, events) % Vertical Velocity
 plotFlightData(ftime, fvt, "Flight", otime, ovt, "OpenRocket Sim", "Time (s)", ...
-    "Total Velocity (ft/s)", "Total Velocity", "Total Vel.") % Total Velocity
+    "Total Velocity (ft/s)", "Total Velocity", "Total Vel.", true, events) % Total Velocity
