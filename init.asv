@@ -1,0 +1,28 @@
+clearvars;
+
+
+
+%| --- Define Altimeter type here ---
+%| --- Currently supported types:
+%| --- FW Blue Raven 2 (define type as "raven")
+
+altimeterType = "raven"; % Define the altimeter type
+
+
+%| --- INPUT DATA CSV FILES HERE ---
+ork_fileName = "L2_Ork_data.csv"; % Define name of ork csv file as a string
+flight_fileName = "L2_Raven_data.csv"; % Define name of flight data csv
+
+
+
+%| --- Sort data into relevant variables for the workspace ---
+
+ork = importdata(ork_fileName, ",");
+flight = readtable(flight_fileName, VariableNamingRule="preserve");
+
+if altimeterType == "raven"
+    ftime = flight.("Flight_Time_(s)");
+    falt = flight.("Baro_Altitude_AGL_(feet)");
+
+
+end
