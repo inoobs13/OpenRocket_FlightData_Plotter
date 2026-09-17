@@ -22,7 +22,11 @@ function plotFlightData(time1, data1, label1, ...
     grid on
     grid minor
 
-    for i=1:height(events)
-        xline(events.Time(i), '--', events.Name(i), 'LabelVerticalAlignment','bottom')
+    if eventsBool == true
+        for i=1:height(events)
+            xline(events.Time(i), '--', events.Name(i), 'LabelVerticalAlignment','bottom')
+        end
+    else
+        disp("Skipping Event markers, not currently supported for this altimeter type...")
     end
 end

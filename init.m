@@ -6,23 +6,28 @@ close all;
 %| --- Currently supported types:
 %| --- FW Blue Raven 2 (define type as "raven")
 
-altimeterType = "raven"; % Define the altimeter type
+altimeterType = "stratologger"; % Define the altimeter type
 
 
 %| --- INPUT DATA CSV FILES HERE ---
 ork_fileName = "L2_Ork_data.csv"; % Define name of ork csv file as a string
-flight_fileName = "L2_Raven_data.csv"; % Define name of flight data csv
+flight_fileName = "Tribunal - 9-12-26.pf2"; % Define name of flight data csv
 
 
 
 %| --- Sort data into relevant variables for the workspace ---
 
-ork = importdata(ork_fileName, ",");
-flight = readtable(flight_fileName, VariableNamingRule="preserve");
+ork = readtable(ork_fileName, VariableNamingRule="preserve");
+
 
 
 %| --- Altimeter data ---
-if altimeterType == "raven"
+
+
+if altimeterType == "raven" %| FIle parsing for Blue Raven Data
+    
+    flight = readtable(flight_fileName, VariableNamingRule="preserve"); % Read Data
+    
     ftime = flight.("Flight_Time_(s)");
     falt = flight.("Baro_Altitude_AGL_(feet)");
     fvv = flight.Velocity_Up;
@@ -36,16 +41,23 @@ if altimeterType == "raven"
     fa_fired = findFireTime(flight.Apo_fired, ftime);
     f3_fired = findFireTime(flight.("3rd_fired"), ftime);
     f4_fired = findFireTime(flight.("4th_fired"), ftime);
-    fapogee = findFireTime(flight.Apogee, ftime);
+    fapogeetime = findFireTime(flight.Apogee, ftime);
     flight_events = ["Apogee"; "Main Charge"; "Drogue Charge"; "3rd Charge"; "4th Charge"];
-    event_times = [fapogee; fm_fired; fa_fired; f3_fired; f4_fired];
+    event_times = [fapogeetime; fm_fired; fa_fired; f3_fired; f4_fired];
     events = table(flight_events, event_times, 'VariableNames', {'Name', 'Time'});
+
+elseif altimeterType == "stratologger"
+    flight = importPF2(flight_fileName);
+    ftime = flight.Time;
+    falt = flight.Altitude;
+    fvt = flight.Velocity;
+    fbatt = flight.Voltage;
+    events = table(0, 0); %| Add events functionality later
 end
 
 
-
 %| --- ORK Data ---
-otime = ork.data(:, 1);
-oalt = ork.data(:, 2);
-ovv = ork.data(:, 3);
-ovt = ork.data(:, 4);
+otime = ork.("# Time (s)");
+oalt = ork.("Altitude (ft)");
+ovv = ork.("Vertical velocity (ft/s)");
+ovt = ork.("Total velocity (ft/s)");

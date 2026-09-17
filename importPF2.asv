@@ -1,0 +1,29 @@
+function [flightData, flightInfo] = importPF2(fileName)
+
+%open file
+fid = fopen(fileName, 'r');
+
+if fid == -1
+    error("Could not open file %s", filename);
+end
+
+%find beggining of primary data
+while ~feof(fid)
+    line = fget1(fid);
+
+    if strcmp(strtrim(line), 'Data: (Time, Altitude, Velocity, Temperature (F), Voltage)')
+        break
+    end
+end
+
+%Read primary data
+dataArray = textscan(fid, '%f %f %f %f %f', 'Delimiter', ',', 'CollectOutput', true);
+
+%close file
+fclose(fid);
+
+data = arr
+
+flightData = inputArg1;
+
+end
